@@ -11,7 +11,7 @@
 
 **"See the disease before you feel it."**
 
-*A high-fidelity, real-time 3D medical animation and interactive spatial simulation illustrating the four-stage progression of cardiovascular atherogenesis, from sub-endothelial lipid trapping to acute occlusive thrombosis.*
+*A patient-centered 3D cardiovascular visualization that makes the progression from endothelial injury to plaque rupture and thrombosis understandable through interactive spatial storytelling.*
 
 </div>
 
@@ -39,43 +39,49 @@
 <a name="features"></a>
 ## ✨ Features
 
-### 🫀 1. Four-Stage Vascular Disease Progression Engine
-Comprehensive interactive modeling of the chronological atheroma cascade:
-- **Stage 01: Endothelial Injury (0% Occlusion)**
-  - Healthy endothelial glycocalyx compromised by shear disturbances, hypertension, and oxidative stress.
-  - Exposure of sub-endothelial extracellular matrix and proteoglycans.
-- **Stage 02: ApoB Retention & Fatty Streak (25% Occlusion)**
-  - Trans-endothelial flux and trapping of Apolipoprotein B containing lipoproteins (LDL, VLDL, Lp(a)).
-  - Monocyte adhesion, sub-endothelial macrophage differentiation, and lipid-engorged Foam Cell formation.
-- **Stage 03: Plaque Growth & Stenosis (65% Occlusion)**
-  - Vascular smooth muscle cell migration, collagen-rich fibrous cap deposition, and necrotic core formation.
-  - Compensatory outward remodeling (Glagov phenomenon) transitioning into critical luminal constriction.
-- **Stage 04: Plaque Rupture & Thrombosis (95% Occlusion)**
-  - Matrix metalloproteinase (MMP) thinning of the fibrous cap under elevated peak shear stress.
-  - Exposure of thrombogenic lipid pool / Tissue Factor to bloodstream triggering rapid platelet aggregation and fibrin mesh clot.
+### 🫀 1. Four-Stage Patient-Centered Progression Story
+A crystal-clear, visual narrative translating the hidden pathology into 4 intuitive stages:
+- **Stage 01: Endothelial Injury (Damage Begins)**
+  - *Story:* "It starts with microscopic damage."
+  - The protective non-stick inner lining of the artery gets irritated by high blood pressure, smoking, or stress, creating tiny openings.
+- **Stage 02: ApoB Retention (Cholesterol Gets Trapped)**
+  - *Story:* "ApoB particles become trapped inside the artery wall."
+  - Bad cholesterol particles (ApoB) slip into the openings, get stuck inside the wall, and trigger inflammation and early fatty streaks.
+- **Stage 03: Plaque Growth & Narrowing (Artery Squeezes)**
+  - *Story:* "Plaque grows and narrows the passage."
+  - The body builds a fibrous cap over the trapped lipids. As the plaque expands, it squeezes the artery and restricts blood flow.
+- **Stage 04: Plaque Rupture & Clot Formation (Sudden Event)**
+  - *Story:* "The plaque tears open — a clot rapidly forms."
+  - The fragile cap tears open under pressure. Platelets rush in within seconds to form an emergency clot that blocks blood from reaching the heart.
 
-### 🎮 2. Interactive 3D & 2D Particle Simulation Explorer
-- **Real-Time WebGL/Three.js Canvas**: Dual-mode visualization supporting 3D volumetric cylinder rendering and high-density 2D laminar cross-sections.
-- **Hemodynamic Particle Physics**: 
-  - Dynamic simulation of thousands of biconcave red blood cells (erythrocytes) obeying parabolic Poiseuille flow profiles.
-  - Atherogenic ApoB lipoprotein particles with active sub-endothelial trapping mechanisms.
-- **Interactive Anatomical Controls**:
-  - **Stenosis Curve Slider**: Adjust arterial lumen constriction from 0% to 95%.
-  - **Flow Velocity Multiplier**: Modulate laminar blood velocity from 0.2x to 3.0x.
-  - **Layer Toggles**: Real-time layer switching for *Endothelial Wall*, *ApoB Lipids*, *Red Blood Cells*, *Laser Scanner*, and *Velocity Vectors*.
+*Note: All stage percentages and sliders are clearly marked as illustrative progression and not individualized clinical diagnostic thresholds.*
 
-### ⏱️ 3. Choreographed 60-Second Guided Flight
-- Automated cinematic camera flight through the coronary arterial tree.
-- Time-coded chapter narration synchronizing camera trajectory, particle densities, and clinical telemetry HUD from healthy baseline to acute thrombus.
+### ⏱️ 2. Choreographed 60-Second Guided Storyboard
+Engineered specifically for the 45–75s medical animation standard with synchronized camera flight and patient-friendly captions:
+- **`00:00 – 00:08`** — **Healthy Artery**: Normal laminar flow with biconcave erythrocytes moving freely through open lumen.
+- **`00:08 – 00:20`** — **Endothelial Injury**: Microscopic surface fissures emerge in the inner lining.
+- **`00:20 – 00:34`** — **ApoB Retention**: Gold ApoB particles penetrate the lining and become permanently trapped.
+- **`00:34 – 00:49`** — **Plaque Growth & Narrowing**: Fibrous cap expands inward, creating a tight channel.
+- **`00:49 – 01:02`** — **Plaque Rupture**: Cap fractures, exposing the lipid core directly to bloodstream.
+- **`01:02 – 01:10`** — **Clot Formation**: Fibrin strands and platelet mesh arrest blood flow in real-time.
 
-### 🔬 4. Scientific Deep-Dive & Clinical Biomarkers
-- Interactive cellular cascade flow diagrams detailing cytokine release (TNF-α, IL-6, VCAM-1).
-- Clinical reference benchmark cards for **ApoB**, **hs-CRP**, **Coronary Artery Calcium (CAC)**, and **Fractional Flow Reserve (FFR)**.
-- Educational interactive quizzes and diagnostic decision-trees for patient comprehension.
+### 🎮 3. Interactive 3D & 2D Particle Simulation Explorer
+- **Real-Time WebGL/Three.js Canvas**: Interactive 3D volumetric artery lumen and 2D laminar cross-section viewer.
+- **Dynamic Particle Physics**:
+  - Parabolic Poiseuille flow profiles with hundreds of flowing red blood cells.
+  - Sub-endothelial lipid trapping physics for ApoB particles.
+- **Interactive Controls**:
+  - **Illustrative Progression Slider**: Scrub smoothly from Stage 1 through Stage 4.
+  - **Layer Toggles**: Real-time layer switching for *Blood Cells*, *Endothelium*, *ApoB Particles*, *Plaque*, *Platelets*, and *Thrombus*.
+  - **Camera Controls**: Rotate, Zoom, and Play/Pause progression.
 
-### 🥽 5. Simulated XR Live Telemetry & VR180 Readiness
-- Fullscreen XR cockpit HUD displaying real-time FPS, draw calls, vertex count, and simulated vitals (ECG heart rate, arterial blood pressure, shear stress).
-- Architected for stereoscopic VR180 / Spatial Video projection.
+### 🔬 4. Science & Patient Understanding Hub
+- Clean, accessible visual guides explaining the vital functions of the arterial lining, ApoB particles, plaque caps, and blood clots without overwhelming medical jargon.
+- Interactive cascade diagram with phase-by-phase visual cards.
+
+### 🥽 5. Simulated XR Live Telemetry (Bonus)
+- Immersive spatial HUD with simulated frame rate (60 FPS), particle count, and biometric vitals.
+- Designed with high-contrast UI suitable for stereoscopic projection.
 
 ---
 
@@ -83,18 +89,18 @@ Comprehensive interactive modeling of the chronological atheroma cascade:
 ## 🛠️ Tech Stack & Languages
 
 ### 💻 Languages
-- **TypeScript (`~5.8.2`)**: Strict type-safe application logic, geometry interfaces, and simulation models.
-- **JavaScript (ES Modules)**: Modern ES2022 bundling and runtime execution.
-- **HTML5 & CSS3**: Semantic markup and modern CSS with custom variable design systems.
-- **GLSL (OpenGL Shading Language)**: Custom vertex and fragment shaders for volumetric lumen rendering and scan-line sweeps.
+- **TypeScript (`~5.8.2`)**: Strict type-safe application logic, simulation states, and UI components.
+- **JavaScript (ES Modules)**: Modern ES2022 module execution.
+- **HTML5 & CSS3**: Semantic elements and custom CSS variable animations.
+- **GLSL (OpenGL Shading Language)**: Custom shaders for arterial lumen rendering and laser scan sweeps.
 
 ### ⚙️ Frameworks & Libraries
-- **React 19 (`^19.0.1`)**: Component-driven reactive UI architecture.
-- **Three.js (`^0.185.1`) & `@types/three`**: WebGL 3D scene graph, camera controllers, shader materials, and lighting pipelines.
-- **Tailwind CSS v4 (`^4.1.14`)**: Ultra-fast utility-first styling with bespoke cyan/crimson telemetry palette.
-- **Motion (`^12.23.24`)**: Fluid UI state transitions and layout choreography.
-- **Lucide React (`^0.546.0`)**: High-contrast, clean medical and technical vector iconography.
-- **Vite 6 (`^6.2.3`)**: Lightning-fast development server and optimized production bundler.
+- **React 19 (`^19.0.1`)**: Fast, reactive component architecture.
+- **Three.js (`^0.185.1`) & `@types/three`**: WebGL 3D rendering pipeline and camera manipulation.
+- **Tailwind CSS v4 (`^4.1.14`)**: Clean modern styling with high-contrast medical telemetry palette.
+- **Motion (`^12.23.24`)**: Smooth layout and state transitions.
+- **Lucide React (`^0.546.0`)**: Vector iconography for medical and technical interfaces.
+- **Vite 6 (`^6.2.3`)**: Optimized development and production bundler.
 
 ---
 
@@ -211,9 +217,15 @@ npx netlify deploy --prod --dir=dist
 <a name="limitations"></a>
 ## ⚠️ Known Limitations & Medical Disclaimer
 
-- **Educational Simulation Scope**: CardioViz XR is built for patient comprehension, clinical education, and spatial biomechanical demonstration. It is not intended as a substitute for individualized clinical diagnosis or patient-specific CT-FFR computational fluid dynamics.
-- **Client-Side Rendering**: Extreme particle densities (>5,000 instanced meshes) on low-power legacy mobile hardware without WebGL 2.0 hardware acceleration may fallback to 2D canvas mode to preserve 60 FPS responsiveness.
-- **No Backend Accounts Required**: The application is deliberately architected as a lightweight, zero-authentication client application without databases, user tracking, or patient credential storage.
+- **Educational & Visual Storytelling Scope**: CardioViz XR is built for patient comprehension, medical education, and visual storytelling. Progression states and percentages are illustrative visualizations and are not intended as diagnostic measurements for clinical treatment decisions.
+- **Client-Side Rendering**: Designed as a zero-authentication, client-only application without external databases or tracking.
+- **Hardware Compatibility**: Standard WebGL is supported across all modern mobile and desktop browsers.
+
+---
+
+## 🤖 Generative AI Disclosure
+
+In accordance with competition guidelines, Generative AI (Google AI Studio and Gemini models) was utilized as an assistive technology during development for code generation, UI scaffolding, educational copy synthesis, and storyboard planning.
 
 ---
 

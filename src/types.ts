@@ -14,7 +14,7 @@ export interface ProgressionStage {
   lumenOcclusion: number; // percentage e.g. 0%, 25%, 65%, 95%
   bloodVelocity: number; // cm/s
   shearStress: number; // Pa
-  riskLevel: 'OPTIMAL' | 'MODERATE' | 'ELEVATED' | 'CRITICAL';
+  riskLevel: 'OPTIMAL' | 'MODERATE' | 'ELEVATED' | 'CRITICAL' | string;
   imageQuadrant: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 }
 

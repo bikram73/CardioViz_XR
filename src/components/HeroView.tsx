@@ -524,68 +524,95 @@ export const HeroView: React.FC<HeroViewProps> = ({
         id="landing-60s-experience-section"
         className="relative py-20 px-4 sm:px-8 md:px-12 max-w-7xl mx-auto w-full border-t border-[#1E3A4C]/50"
       >
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-3 border border-[#2fd9f4]/40 bg-[#132030]/80 rounded-full">
             <Clock className="w-3.5 h-3.5 text-[#2fd9f4]" />
             <span className="font-technical text-[11px] text-[#2fd9f4] uppercase tracking-widest font-medium">
-              Choreographed 3D Medical Animation
+              60-Second Storyboard &amp; Patient Animation
             </span>
           </div>
           <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight uppercase">
-            The 60-Second Guided Flight
+            The 60-Second Guided Journey
           </h2>
           <p className="font-body text-[#bbc9cd] text-sm sm:text-base mt-2">
-            A continuous cinematic camera voyage through the coronary arterial tree, capturing critical cellular milestones in high-fidelity 3D.
+            A clear visual narrative showing exactly how a healthy artery silently transforms into a sudden blockage in four easy-to-understand stages.
           </p>
+          <div className="inline-block mt-3 text-[11px] font-technical uppercase tracking-wider text-[#bbc9cd]/70 bg-[#132030]/60 px-3 py-1 rounded border border-[#3c494c]/40">
+            * Illustrative progression — not a clinical measurement
+          </div>
         </div>
 
-        {/* Timeline Horizontal Steps */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Timeline 6 Step Breakdown */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <div className="glass-panel p-5 rounded-xl border border-[#2fd9f4]/30 relative">
             <div className="font-mono-data text-xs text-[#2fd9f4] font-bold mb-2">
-              00:00 – 00:15
+              00:00 – 00:08
             </div>
-            <h4 className="font-display text-base font-semibold text-white mb-2">
-              Healthy Lumen & Nitric Oxide
+            <h4 className="font-display text-base font-semibold text-white mb-1.5">
+              1. Healthy Artery
             </h4>
             <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
-              Pristine endothelial glycocalyx with laminar red blood cell velocity (42 cm/s) and optimal shear stress balance.
+              Blood cells glide freely through a wide, flexible artery with a pristine, non-stick inner lining.
             </p>
           </div>
 
-          <div className="glass-panel p-5 rounded-xl border border-[#ffae83]/30 relative">
-            <div className="font-mono-data text-xs text-[#ffae83] font-bold mb-2">
-              00:15 – 00:30
+          <div className="glass-panel p-5 rounded-xl border border-[#2fd9f4]/40 relative">
+            <div className="font-mono-data text-xs text-[#2fd9f4] font-bold mb-2">
+              00:08 – 00:20
             </div>
-            <h4 className="font-display text-base font-semibold text-white mb-2">
-              ApoB Particle Trapping
+            <h4 className="font-display text-base font-semibold text-white mb-1.5">
+              2. Endothelial Injury
             </h4>
             <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
-              Low-density lipoproteins bind to sub-intimal proteoglycans. Monocyte adhesion and foam cell formation commence.
+              Irritation from blood pressure or stress creates microscopic cracks in the artery's protective shield.
             </p>
           </div>
 
-          <div className="glass-panel p-5 rounded-xl border border-[#ffae83]/30 relative">
-            <div className="font-mono-data text-xs text-[#ffae83] font-bold mb-2">
-              00:30 – 00:45
+          <div className="glass-panel p-5 rounded-xl border border-[#ffd4bf]/40 relative">
+            <div className="font-mono-data text-xs text-[#ffd4bf] font-bold mb-2">
+              00:20 – 00:34
             </div>
-            <h4 className="font-display text-base font-semibold text-white mb-2">
-              Necrotic Core & Stenosis
+            <h4 className="font-display text-base font-semibold text-white mb-1.5">
+              3. ApoB Particles Trapped
             </h4>
             <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
-              Fibrous cap encases the lipid pool. The narrowing lumen generates violent turbulent jet stream and shear escalation.
+              Bad cholesterol particles (ApoB) slip through the cracks and get stuck inside the wall, triggering swelling.
+            </p>
+          </div>
+
+          <div className="glass-panel p-5 rounded-xl border border-[#ffae83]/40 relative">
+            <div className="font-mono-data text-xs text-[#ffae83] font-bold mb-2">
+              00:34 – 00:49
+            </div>
+            <h4 className="font-display text-base font-semibold text-white mb-1.5">
+              4. Plaque Grows &amp; Narrows
+            </h4>
+            <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
+              A fatty lump builds up under a thin cap. As it expands, the bloodway gets squeezed and flow speeds up.
             </p>
           </div>
 
           <div className="glass-panel p-5 rounded-xl border border-[#ffb4ab]/40 relative bg-[#93000a]/10">
             <div className="font-mono-data text-xs text-[#ffb4ab] font-bold mb-2">
-              00:45 – 01:00
+              00:49 – 01:02
             </div>
-            <h4 className="font-display text-base font-semibold text-[#ffb4ab] mb-2">
-              Cap Rupture & Thrombosis
+            <h4 className="font-display text-base font-semibold text-[#ffb4ab] mb-1.5">
+              5. The Plaque Tears Open
             </h4>
             <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
-              Tissue factor contact triggers thrombin burst. Fibrin mesh rapidly traps erythrocytes, causing acute lumen arrest.
+              Under high pressure, the fragile cap cracks open, exposing the fatty core directly to passing blood.
+            </p>
+          </div>
+
+          <div className="glass-panel p-5 rounded-xl border border-[#ffb4ab]/60 relative bg-[#93000a]/20 shadow-[0_0_15px_rgba(255,180,171,0.2)]">
+            <div className="font-mono-data text-xs text-[#ffb4ab] font-bold mb-2">
+              01:02 – 01:10
+            </div>
+            <h4 className="font-display text-base font-semibold text-[#ffb4ab] mb-1.5">
+              6. A Clot Rapidly Forms
+            </h4>
+            <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
+              Sticky blood platelets rush in within seconds, forming an instant clot that blocks oxygen to the heart.
             </p>
           </div>
         </div>
@@ -598,7 +625,7 @@ export const HeroView: React.FC<HeroViewProps> = ({
             className="inline-flex items-center gap-3 bg-[#2fd9f4] text-[#050B14] font-technical text-xs uppercase tracking-widest font-bold px-8 py-4 rounded hover:bg-[#8aebff] transition-all shadow-[0_0_25px_rgba(47,217,244,0.4)] cursor-pointer"
           >
             <Play className="w-4 h-4 fill-current" />
-            <span>Launch 60s 3D Experience</span>
+            <span>Watch 60-Second Interactive Story</span>
           </button>
         </div>
       </section>

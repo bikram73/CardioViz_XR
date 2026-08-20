@@ -506,10 +506,10 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
                   style={{ color: activeStage.accentHex }}
                 />
                 <h3 className="font-display font-bold text-sm sm:text-base text-white">
-                  {selectedStageId === 1 && 'Healthy Lumen'}
-                  {selectedStageId === 2 && 'Plaque Buildup'}
-                  {selectedStageId === 3 && 'Severe Stenosis'}
-                  {selectedStageId === 4 && 'Thrombus Occlusion'}
+                  {selectedStageId === 1 && '1. Healthy / Inner Damage'}
+                  {selectedStageId === 2 && '2. Trapped Cholesterol'}
+                  {selectedStageId === 3 && '3. Plaque Narrowing'}
+                  {selectedStageId === 4 && '4. Rupture & Sudden Clot'}
                 </h3>
               </div>
               <span
@@ -524,31 +524,36 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
             </div>
             <p className="font-body text-xs text-[#bbc9cd] leading-relaxed">
               {selectedStageId === 1 &&
-                'Normal laminar flow maintained by healthy endothelial lining with intact glycocalyx and standard shear stress.'}
+                'Normal smooth blood flow. Tiny microscopic cracks begin forming in the inner protective lining from pressure or stress.'}
               {selectedStageId === 2 &&
-                'Significant lipid accumulation observed in the intima layer, restricting normal hemodynamic flow.'}
+                'Bad cholesterol particles (ApoB) slip into the cracks and get stuck inside the wall, causing inflammation and early fatty buildup.'}
               {selectedStageId === 3 &&
-                'Fibrous cap covers a necrotic lipid core, causing severe mechanical narrowing and high turbulent shear stress.'}
+                'The body builds a fibrous cap over the trapped lipids. As the plaque expands inward, the bloodway gets increasingly tight.'}
               {selectedStageId === 4 &&
-                'Acute cap fissure exposes tissue factor, precipitating sudden platelet aggregation and total arterial occlusion.'}
+                'Under high blood pressure, the thin cap tears open. Blood platelets instantly form a sudden clot, cutting off oxygen.'}
             </p>
 
-            {/* Quick Telemetry metrics */}
-            <div className="mt-3 pt-2 border-t border-[#3c494c]/30 grid grid-cols-2 gap-2 text-[11px] font-mono-data">
+            {/* Quick Progression metrics */}
+            <div className="mt-3 pt-2 border-t border-[#3c494c]/30 flex items-center justify-between text-[11px] font-mono-data">
               <div className="text-[#bbc9cd]">
-                Lumen Stenosis:{' '}
-                <span className="text-white font-bold">{Math.round(progress)}%</span>
+                Progression Stage:{' '}
+                <span className="text-white font-bold">Stage 0{selectedStageId} of 04</span>
               </div>
-              <div className="text-[#bbc9cd]">
-                Velocity:{' '}
-                <span
-                  style={{ color: activeStage.accentHex }}
-                  className="font-bold"
-                >
-                  {activeStage.bloodVelocity} cm/s
-                </span>
+              <div className="text-[#bbc9cd]/60 text-[10px]">
+                Illustrative Mode
               </div>
             </div>
+          </div>
+
+          {/* Centered Patient Story Caption Overlay */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 glass-panel px-4 sm:px-6 py-2.5 rounded-full border border-[#2fd9f4]/40 shadow-2xl backdrop-blur-xl flex items-center gap-3 max-w-[90%] text-center">
+            <span className="w-2 h-2 rounded-full bg-[#2fd9f4] animate-pulse shrink-0" />
+            <p className="font-mono-data text-xs sm:text-sm text-white font-medium">
+              {progress < 20 && '00:00–00:08 — Healthy artery with smooth, open blood flow.'}
+              {progress >= 20 && progress < 45 && '00:08–00:20 — Damage begins: ApoB cholesterol particles enter and get trapped.'}
+              {progress >= 45 && progress < 75 && '00:34–00:49 — Plaque grows under a fibrous cap, squeezing the passage.'}
+              {progress >= 75 && '00:49–01:10 — The cap tears open! Blood platelets rapidly create an obstructing clot.'}
+            </p>
           </div>
 
           {/* Floating Visual Legend (Top/Bottom Right) */}
@@ -653,7 +658,7 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
           </div>
 
           {/* Bottom Timeline & Controls Bar */}
-          <div className="w-full glass-panel border-t border-[#1E3A4C] p-4 sm:p-5 z-20 flex flex-col gap-3.5 backdrop-blur-2xl">
+          <div className="w-full glass-panel border-t border-[#1E3A4C] p-4 sm:p-5 z-20 flex flex-col gap-2.5 backdrop-blur-2xl">
             {/* Progression Slider */}
             <div className="w-full flex items-center gap-4">
               <span className="font-mono-data text-xs text-[#bbc9cd] select-none min-w-[24px]">
@@ -676,6 +681,11 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
               <span className="font-mono-data text-xs text-[#bbc9cd] select-none min-w-[34px]">
                 100%
               </span>
+            </div>
+
+            {/* Disclaimer subtitle */}
+            <div className="text-center text-[10px] sm:text-[11px] font-technical text-[#bbc9cd]/60 -mt-1">
+              * Illustrative progression — not a clinical measurement
             </div>
 
             {/* Bottom Controls Row */}
