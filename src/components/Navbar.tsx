@@ -5,14 +5,12 @@ import { Radio, Menu, X, ShieldAlert, Sparkles } from 'lucide-react';
 interface NavbarProps {
   currentTab: NavigationTab;
   onSelectTab: (tab: NavigationTab) => void;
-  onOpenLogin: () => void;
   onOpenGoLive: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentTab,
   onSelectTab,
-  onOpenLogin,
   onOpenGoLive,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -106,14 +104,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Action Controls */}
         <div className="flex items-center gap-3">
           <button
-            id="nav-login-button"
-            onClick={onOpenLogin}
-            className="hidden sm:inline-flex items-center gap-1.5 font-technical text-xs uppercase tracking-widest px-3.5 py-1.5 rounded text-[#bbc9cd] hover:text-[#2fd9f4] hover:bg-[#1e2b3b]/60 transition-all border border-transparent hover:border-[#3c494c]/50"
-          >
-            Login
-          </button>
-
-          <button
             id="nav-go-live-button"
             onClick={onOpenGoLive}
             className="group relative bg-[#2fd9f4] text-[#050B14] font-technical text-xs uppercase tracking-widest font-bold px-5 py-2 rounded shadow-[0_0_15px_rgba(47,217,244,0.4)] hover:bg-[#8aebff] hover:shadow-[0_0_25px_rgba(47,217,244,0.7)] transition-all active:scale-95 flex items-center gap-2"
@@ -160,24 +150,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          <div className="pt-3 border-t border-[#3c494c]/50 flex gap-3">
-            <button
-              onClick={() => {
-                onOpenLogin();
-                setMobileMenuOpen(false);
-              }}
-              className="flex-1 py-2.5 text-center font-technical text-xs uppercase tracking-widest text-[#bbc9cd] hover:text-white bg-[#132030] border border-[#3c494c] rounded"
-            >
-              Login
-            </button>
+          <div className="pt-3 border-t border-[#3c494c]/50">
             <button
               onClick={() => {
                 onOpenGoLive();
                 setMobileMenuOpen(false);
               }}
-              className="flex-1 py-2.5 text-center font-technical text-xs uppercase tracking-widest font-bold text-[#050B14] bg-[#2fd9f4] rounded shadow-[0_0_12px_rgba(47,217,244,0.4)]"
+              className="w-full py-2.5 text-center font-technical text-xs uppercase tracking-widest font-bold text-[#050B14] bg-[#2fd9f4] rounded shadow-[0_0_12px_rgba(47,217,244,0.4)] flex items-center justify-center gap-2"
             >
-              Go Live XR
+              <Radio className="w-3.5 h-3.5 text-[#050B14] animate-pulse" />
+              <span>Go Live XR</span>
             </button>
           </div>
         </div>

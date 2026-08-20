@@ -12,13 +12,11 @@ import { PathologiesView } from './components/PathologiesView';
 import { ProceduresView } from './components/ProceduresView';
 import { EducationView } from './components/EducationView';
 import { LiveXRModal } from './components/LiveXRModal';
-import { LoginModal } from './components/LoginModal';
 import { Footer } from './components/Footer';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<NavigationTab>('models');
   const [selectedStageId, setSelectedStageId] = useState<number>(2);
-  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isGoLiveOpen, setIsGoLiveOpen] = useState<boolean>(false);
 
   const handleStageSelectAndNavigate = (stageId: number) => {
@@ -34,7 +32,6 @@ export default function App() {
       <Navbar
         currentTab={currentTab}
         onSelectTab={setCurrentTab}
-        onOpenLogin={() => setIsLoginOpen(true)}
         onOpenGoLive={() => setIsGoLiveOpen(true)}
       />
 
@@ -77,12 +74,6 @@ export default function App() {
       <LiveXRModal
         isOpen={isGoLiveOpen}
         onClose={() => setIsGoLiveOpen(false)}
-      />
-
-      {/* Physician / Researcher Portal Authentication Modal */}
-      <LoginModal
-        isOpen={isLoginOpen}
-        onClose={() => setIsLoginOpen(false)}
       />
     </div>
   );
