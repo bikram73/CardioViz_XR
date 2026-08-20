@@ -1,0 +1,6 @@
+{
+  "name": "CardioViz XR",
+  "description": "CardioViz XR - Advanced Cardiovascular Disease Progression and 3D Arterial XR Visualization Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
