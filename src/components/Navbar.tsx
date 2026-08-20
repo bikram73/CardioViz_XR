@@ -16,10 +16,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems: { id: NavigationTab; label: string }[] = [
-    { id: 'models', label: 'Models' },
-    { id: 'pathologies', label: 'Pathologies' },
-    { id: 'procedures', label: 'Procedures' },
-    { id: 'education', label: 'Education' },
+    { id: 'models', label: 'Home' },
+    { id: 'pathologies', label: 'Progression' },
+    { id: 'procedures', label: '3D Explorer' },
+    { id: 'education', label: 'Science' },
   ];
 
   return (

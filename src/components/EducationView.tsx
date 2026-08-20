@@ -59,18 +59,23 @@ export const EducationView: React.FC = () => {
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 md:px-12 pt-28 pb-16 relative z-10 flex flex-col gap-14">
       {/* Header */}
       <header className="text-center md:text-left flex flex-col gap-3">
+        <div className="flex items-center justify-center md:justify-start gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#2fd9f4] shadow-[0_0_8px_#2fd9f4]" />
+          <span className="font-technical text-xs text-[#2fd9f4] uppercase tracking-widest font-medium">
+            Patient Understanding &amp; Biological Guide
+          </span>
+        </div>
         <h1
           id="science-main-heading"
           className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-bold text-white tracking-tight uppercase leading-tight"
         >
-          THE SCIENCE BEHIND <br />
+          THE SCIENCE OF <br />
           <span className="text-[#2fd9f4] drop-shadow-[0_0_20px_rgba(47,217,244,0.4)]">
-            THE VISUALIZATION
+            HOW ARTERY DISEASE DEVELOPS
           </span>
         </h1>
         <p className="font-body text-[#bbc9cd] text-sm sm:text-base max-w-2xl md:ml-0 mx-auto leading-relaxed">
-          Understanding the cellular and molecular mechanisms driving cardiovascular
-          pathology through high-fidelity XR simulation.
+          Learn how microscopic irritation, trapped cholesterol particles, and fragile plaque caps combine to cause a sudden clot.
         </p>
       </header>
 
