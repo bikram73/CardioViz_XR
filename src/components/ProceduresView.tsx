@@ -82,15 +82,19 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
+      let nextStage: number | null = null;
       setProgress((prev) => {
         const next = prev >= 100 ? 0 : Math.min(100, prev + 0.35);
         const stage = next < 25 ? 1 : next < 55 ? 2 : next < 85 ? 3 : 4;
         if (stage !== prevExternalStageRef.current) {
           prevExternalStageRef.current = stage;
-          onSelectStage(stage);
+          nextStage = stage;
         }
         return next;
       });
+      if (nextStage !== null) {
+        onSelectStage(nextStage);
+      }
     }, 32);
     return () => clearInterval(interval);
   }, [isPlaying, onSelectStage]);
