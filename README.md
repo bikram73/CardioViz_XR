@@ -300,12 +300,6 @@ npx netlify deploy --prod --dir=dist
 
 ---
 
-## 🤖 Generative AI Disclosure
-
-In accordance with competition guidelines, Generative AI (Google AI Studio and Gemini models) was utilized as an assistive technology during development for code generation, UI scaffolding, educational copy synthesis, and storyboard planning.
-
----
-
 <a name="license"></a>
 ## 📄 License
 
