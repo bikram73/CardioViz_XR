@@ -7,11 +7,17 @@
 [![Three.js](https://img.shields.io/badge/Three.js-WebGL-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-6.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Netlify](https://img.shields.io/badge/Netlify-Ready-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://www.netlify.com/)
+[![Netlify](https://img.shields.io/badge/Netlify-cardioviz--xr.netlify.app-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://cardioviz-xr.netlify.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-bikram73%2FCardioViz__XR-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bikram73/CardioViz_XR)
 
 **"See the disease before you feel it."**
 
 *A patient-centered 3D cardiovascular visualization that makes the progression from endothelial injury to plaque rupture and thrombosis understandable through interactive spatial storytelling.*
+
+<br />
+
+🌐 **Live Web Application:** [https://cardioviz-xr.netlify.app/](https://cardioviz-xr.netlify.app/)  
+📦 **GitHub Repository:** [https://github.com/bikram73/CardioViz_XR](https://github.com/bikram73/CardioViz_XR)
 
 </div>
 
@@ -218,8 +224,8 @@ CardioViz-XR/
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/cardioviz-xr.git
-   cd cardioviz-xr
+   git clone https://github.com/bikram73/CardioViz_XR.git
+   cd CardioViz_XR
    ```
 
 2. **Install Dependencies:**
@@ -248,6 +254,9 @@ CardioViz-XR/
 
 <a name="deployment"></a>
 ## 🌐 Deployment
+
+The production application is live and hosted on Netlify:  
+👉 **[https://cardioviz-xr.netlify.app/](https://cardioviz-xr.netlify.app/)**
 
 ### 🚀 Deploying to Netlify (Zero Configuration)
 
