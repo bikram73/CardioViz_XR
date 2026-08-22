@@ -465,82 +465,102 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
       {/* Main Simulation Viewport Container */}
       <div className="flex-1 flex gap-4 sm:gap-6 min-h-0 relative">
         {/* Left Vertical Stage Navigation */}
-        <aside className="w-14 sm:w-16 flex flex-col items-center justify-center gap-6 z-20 select-none py-4">
-          <div className="flex flex-col gap-7 sm:gap-8 relative items-center">
+        <aside className="w-20 sm:w-24 shrink-0 flex flex-col items-center justify-center select-none py-4 glass-panel rounded-2xl border border-[#1E3A4C] z-20">
+          <div className="flex flex-col gap-6 sm:gap-7 relative items-center">
             {/* Vertical Connecting Line */}
-            <div className="absolute top-4 bottom-4 w-[1px] bg-[#3c494c]/40 -z-10" />
+            <div className="absolute top-5 bottom-5 w-[1px] bg-[#3c494c]/40 -z-10" />
 
             {/* Stage 01 */}
-            <button
-              id="stage-nav-btn-1"
-              onClick={() => handleStageSelect(1)}
-              className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
-                selectedStageId === 1
-                  ? 'border-[#2fd9f4] glow-active text-[#2fd9f4] scale-110 bg-[#061423]'
-                  : 'text-[#bbc9cd] hover:text-[#2fd9f4] hover:border-[#2fd9f4]/60'
-              }`}
-            >
-              <span className="font-mono-data text-xs sm:text-sm font-bold">01</span>
-              {selectedStageId === 1 && (
-                <div className="absolute left-14 sm:left-16 top-1/2 -translate-y-1/2 font-technical text-[11px] text-[#2fd9f4] bg-[#132030]/90 px-2.5 py-1 rounded border border-[#2fd9f4]/40 whitespace-nowrap shadow-[0_0_10px_rgba(47,217,244,0.3)] z-30">
-                  HEALTHY ENDOTHELIUM
-                </div>
-              )}
-            </button>
+            <div className="flex flex-col items-center gap-1.5">
+              <button
+                id="stage-nav-btn-1"
+                onClick={() => handleStageSelect(1)}
+                className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
+                  selectedStageId === 1
+                    ? 'border-[#2fd9f4] glow-active text-[#2fd9f4] scale-110 bg-[#061423]'
+                    : 'text-[#bbc9cd] hover:text-[#2fd9f4] hover:border-[#2fd9f4]/60'
+                }`}
+                title="Stage 1: Healthy Endothelium"
+              >
+                <span className="font-mono-data text-xs sm:text-sm font-bold">01</span>
+              </button>
+              <span
+                className={`font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-center max-w-[76px] leading-tight transition-colors ${
+                  selectedStageId === 1 ? 'text-[#2fd9f4] font-bold' : 'text-[#bbc9cd]/60'
+                }`}
+              >
+                Healthy
+              </span>
+            </div>
 
             {/* Stage 02 */}
-            <button
-              id="stage-nav-btn-2"
-              onClick={() => handleStageSelect(2)}
-              className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
-                selectedStageId === 2
-                  ? 'border-[#ffae83] shadow-[0_0_15px_rgba(255,174,131,0.6)] text-[#ffae83] scale-110 bg-[#061423]'
-                  : 'text-[#bbc9cd] hover:text-[#ffae83] hover:border-[#ffae83]/60'
-              }`}
-            >
-              <span className="font-mono-data text-xs sm:text-sm font-bold">02</span>
-              {selectedStageId === 2 && (
-                <div className="absolute left-14 sm:left-16 top-1/2 -translate-y-1/2 font-technical text-[11px] text-[#ffae83] bg-[#132030]/90 px-2.5 py-1 rounded border border-[#ffae83]/40 whitespace-nowrap shadow-[0_0_10px_rgba(255,174,131,0.3)] z-30">
-                  ATHEROSCLEROSIS
-                </div>
-              )}
-            </button>
+            <div className="flex flex-col items-center gap-1.5">
+              <button
+                id="stage-nav-btn-2"
+                onClick={() => handleStageSelect(2)}
+                className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
+                  selectedStageId === 2
+                    ? 'border-[#ffae83] shadow-[0_0_15px_rgba(255,174,131,0.6)] text-[#ffae83] scale-110 bg-[#061423]'
+                    : 'text-[#bbc9cd] hover:text-[#ffae83] hover:border-[#ffae83]/60'
+                }`}
+                title="Stage 2: Atherosclerosis"
+              >
+                <span className="font-mono-data text-xs sm:text-sm font-bold">02</span>
+              </button>
+              <span
+                className={`font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-center max-w-[76px] leading-tight transition-colors ${
+                  selectedStageId === 2 ? 'text-[#ffae83] font-bold' : 'text-[#bbc9cd]/60'
+                }`}
+              >
+                Fatty Streak
+              </span>
+            </div>
 
             {/* Stage 03 */}
-            <button
-              id="stage-nav-btn-3"
-              onClick={() => handleStageSelect(3)}
-              className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
-                selectedStageId === 3
-                  ? 'border-[#ffae83] shadow-[0_0_15px_rgba(255,174,131,0.6)] text-[#ffae83] scale-110 bg-[#061423]'
-                  : 'text-[#bbc9cd] hover:text-[#ffae83] hover:border-[#ffae83]/60'
-              }`}
-            >
-              <span className="font-mono-data text-xs sm:text-sm font-bold">03</span>
-              {selectedStageId === 3 && (
-                <div className="absolute left-14 sm:left-16 top-1/2 -translate-y-1/2 font-technical text-[11px] text-[#ffae83] bg-[#132030]/90 px-2.5 py-1 rounded border border-[#ffae83]/40 whitespace-nowrap shadow-[0_0_10px_rgba(255,174,131,0.3)] z-30">
-                  PLAQUE EXPANSION
-                </div>
-              )}
-            </button>
+            <div className="flex flex-col items-center gap-1.5">
+              <button
+                id="stage-nav-btn-3"
+                onClick={() => handleStageSelect(3)}
+                className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
+                  selectedStageId === 3
+                    ? 'border-[#ffae83] shadow-[0_0_15px_rgba(255,174,131,0.6)] text-[#ffae83] scale-110 bg-[#061423]'
+                    : 'text-[#bbc9cd] hover:text-[#ffae83] hover:border-[#ffae83]/60'
+                }`}
+                title="Stage 3: Plaque Expansion"
+              >
+                <span className="font-mono-data text-xs sm:text-sm font-bold">03</span>
+              </button>
+              <span
+                className={`font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-center max-w-[76px] leading-tight transition-colors ${
+                  selectedStageId === 3 ? 'text-[#ffae83] font-bold' : 'text-[#bbc9cd]/60'
+                }`}
+              >
+                Expansion
+              </span>
+            </div>
 
             {/* Stage 04 */}
-            <button
-              id="stage-nav-btn-4"
-              onClick={() => handleStageSelect(4)}
-              className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
-                selectedStageId === 4
-                  ? 'border-[#ffb4ab] shadow-[0_0_20px_rgba(255,180,171,0.8)] text-[#ffb4ab] scale-110 bg-[#93000a]/40'
-                  : 'text-[#bbc9cd] hover:text-[#ffb4ab] hover:border-[#ffb4ab]/60'
-              }`}
-            >
-              <span className="font-mono-data text-xs sm:text-sm font-bold">04</span>
-              {selectedStageId === 4 && (
-                <div className="absolute left-14 sm:left-16 top-1/2 -translate-y-1/2 font-technical text-[11px] text-[#ffb4ab] bg-[#93000a]/90 px-2.5 py-1 rounded border border-[#ffb4ab]/50 whitespace-nowrap shadow-[0_0_15px_rgba(255,180,171,0.6)] z-30">
-                  RUPTURE &amp; CLOT
-                </div>
-              )}
-            </button>
+            <div className="flex flex-col items-center gap-1.5">
+              <button
+                id="stage-nav-btn-4"
+                onClick={() => handleStageSelect(4)}
+                className={`w-10 sm:w-11 h-10 sm:h-11 rounded-full glass-panel flex items-center justify-center transition-all duration-300 relative group cursor-pointer ${
+                  selectedStageId === 4
+                    ? 'border-[#ffb4ab] shadow-[0_0_20px_rgba(255,180,171,0.8)] text-[#ffb4ab] scale-110 bg-[#93000a]/40'
+                    : 'text-[#bbc9cd] hover:text-[#ffb4ab] hover:border-[#ffb4ab]/60'
+                }`}
+                title="Stage 4: Rupture & Clot"
+              >
+                <span className="font-mono-data text-xs sm:text-sm font-bold">04</span>
+              </button>
+              <span
+                className={`font-technical text-[9px] sm:text-[10px] uppercase tracking-wider text-center max-w-[76px] leading-tight transition-colors ${
+                  selectedStageId === 4 ? 'text-[#ffb4ab] font-bold' : 'text-[#bbc9cd]/60'
+                }`}
+              >
+                Rupture
+              </span>
+            </div>
           </div>
         </aside>
 
