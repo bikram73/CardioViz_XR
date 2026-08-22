@@ -42,6 +42,7 @@ export const HeroView: React.FC<HeroViewProps> = ({
           <img
             alt="Macroscopic internal view of an artery with red blood cells flowing through, illuminated by a medical cyan scanning laser light"
             className="w-full h-full object-cover opacity-45 mix-blend-screen scale-105 transition-transform duration-1000"
+            referrerPolicy="no-referrer"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZAr1Jgprd63dMmWdw2oOKAPPtsDveVKmTbWOH8CKKOALI_7b8vrGZPXz4GIRamhxR6VCZi2s9u3hpG3fxtFmM7rY5sGpsmLQScAaRtIomokUzOE3L6O2UFU73xfoR3G57O1-MnxrneFS4e56ABaXvaQFg-edODWLRxLd5BAtoGp1FA3SAykeJ-enq6oRGHp29EBzSw05S99HfUqRHchCmL8jomqgwKl0dTjlVLGbdxqDudRIy77oaBw"
           />
           {/* Soft atmospheric gradients */}

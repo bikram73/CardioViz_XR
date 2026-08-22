@@ -579,6 +579,7 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
             <img
               alt="3D Visualization of the interior of a human artery with red blood cells"
               className="w-full h-full object-cover absolute inset-0 z-0 opacity-90 mix-blend-screen"
+              referrerPolicy="no-referrer"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZAr1Jgprd63dMmWdw2oOKAPPtsDveVKmTbWOH8CKKOALI_7b8vrGZPXz4GIRamhxR6VCZi2s9u3hpG3fxtFmM7rY5sGpsmLQScAaRtIomokUzOE3L6O2UFU73xfoR3G57O1-MnxrneFS4e56ABaXvaQFg-edODWLRxLd5BAtoGp1FA3SAykeJ-enq6oRGHp29EBzSw05S99HfUqRHchCmL8jomqgwKl0dTjlVLGbdxqDudRIy77oaBw"
             />
 
