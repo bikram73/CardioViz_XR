@@ -25,6 +25,7 @@
 |--------------------------------------------------------------|------------------------------------------------|
 | <div align="center">**View the challenge alignment and judging criteria.** 👉</div> | <div align="center"><a href="#challenge-alignment"><img src="https://img.shields.io/badge/🏆%20Challenge%20Alignment-F59E0B?style=for-the-badge" /></a></div> |
 | <div align="center">**View competition deliverables & submission package.** 👉</div> | <div align="center"><a href="#competition-deliverables"><img src="https://img.shields.io/badge/🎬%20Deliverables-EC4899?style=for-the-badge" /></a></div> |
+| <div align="center">**Read the 1-page creative & technical challenge breakdown.** 👉</div> | <div align="center"><a href="#challenge-breakdown"><img src="https://img.shields.io/badge/📄%20Challenge%20Breakdown-3B82F6?style=for-the-badge" /></a></div> |
 | <div align="center">**View the project features and capabilities.** 👉</div> | <div align="center"><a href="#features"><img src="https://img.shields.io/badge/✨%20Features-4F46E5?style=for-the-badge" /></a></div> |
 | <div align="center">**View the technologies, frameworks, and programming languages used.** 👉</div> | <div align="center"><a href="#tech-stack"><img src="https://img.shields.io/badge/🛠️%20Tech%20Stack-0891B2?style=for-the-badge" /></a></div> |
 | <div align="center">**Explore the project's folder and file organization.** 👉</div> | <div align="center"><a href="#file-structure"><img src="https://img.shields.io/badge/📂%20File%20Structure-10B981?style=for-the-badge" /></a></div> |
@@ -67,6 +68,7 @@
 - Material and shader architecture (Poiseuille flow equations, GLSL lumen shaders)
 - 3D asset workflow & open-source licenses
 - Generative AI disclosure statement
+- 👉 **[View CardioViz XR 1-Page Breakdown PDF](./docs/CardioViz_XR_1_Page_Breakdown.pdf)**
 
 ### 🌟 Supporting & Bonus Deliverables
 
@@ -75,6 +77,25 @@
 
 **4. VR180 / Spatial Video Compatibility**
 - High-contrast stereoscopic UI layout designed for head-mounted displays (e.g. Meta Quest 3).
+
+---
+
+<a name="challenge-breakdown"></a>
+## 📄 Challenge Breakdown
+
+The complete 1-page creative and technical breakdown submitted for the **CardioViz XR: 48-Hour Medical Animation Challenge** is available below:
+
+👉 **[View CardioViz XR 1-Page Breakdown PDF](./docs/CardioViz_XR_1_Page_Breakdown.pdf)**
+
+| Section | Summary Description |
+|---|---|
+| **1. Creative Concept** | *"From Silent Damage to Sudden Blockage"* — Cinematic vessel cutaway communicating invisible cardiovascular pathology to a non-medical audience. |
+| **2. Narrative Flow** | 4 Chronological Stages: Endothelial Injury $\rightarrow$ ApoB Retention $\rightarrow$ Plaque Growth $\rightarrow$ Rupture &amp; Thrombus. |
+| **3. Lighting &amp; Texturing** | Soft clinical key lighting, subtle specular rim response, with differentiated lipid, erythrocyte, and thrombus materials. |
+| **4. Animation &amp; Pacing** | Seamless continuous zoom from wide coronary artery geometry into intimate cross-sectional detail. |
+| **5. Asset &amp; Production Notes** | Custom procedural WebGL geometries, instanced meshes, and GLSL shaders built specifically for this challenge. |
+| **6. Generative-AI Disclosure** | Generative AI utilized for code scaffolding, UI design assistance, and copy planning; 3D visualization executes via client-side WebGL. |
+| **7. Patient-Comprehension Goal** | One-viewing non-medical comprehension from healthy flow to acute occlusive clot formation. |
 
 ---
 
@@ -153,11 +174,15 @@ Engineered specifically for the 45–75s medical animation standard with synchro
 CardioViz-XR/
 ├── .env.example              # Template for environment configuration
 ├── .gitignore                # Git ignored build artifacts and node modules
+├── docs/                     # Challenge documentation & submission assets
+│   └── CardioViz_XR_1_Page_Breakdown.pdf # 1-Page Creative Breakdown PDF
 ├── index.html                # Main HTML5 entrypoint with Google Fonts
 ├── metadata.json             # AI Studio applet metadata & permissions
 ├── netlify.toml              # Netlify build configuration & SPA redirects
 ├── package.json              # Project dependencies, scripts, and engine specs
-├── public/                   # Static assets
+├── public/                   # Static assets & web-accessible downloads
+│   ├── docs/
+│   │   └── CardioViz_XR_1_Page_Breakdown.pdf
 │   └── _redirects            # Netlify SPA fallback routing rule
 ├── src/
 │   ├── main.tsx              # React DOM root entrypoint

@@ -51,6 +51,14 @@ export const Footer: React.FC = () => {
         >
           Contact Research
         </button>
+        <a
+          href="/docs/CardioViz_XR_1_Page_Breakdown.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#2fd9f4] hover:underline transition-colors"
+        >
+          Challenge PDF Breakdown
+        </a>
       </div>
 
       <div className="text-[#bbc9cd]/60 text-[11px] max-w-xl">

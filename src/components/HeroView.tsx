@@ -19,6 +19,7 @@ import {
   ShieldAlert,
   Clock,
   ExternalLink,
+  FileText,
 } from 'lucide-react';
 
 interface HeroViewProps {
@@ -102,8 +103,21 @@ export const HeroView: React.FC<HeroViewProps> = ({
                 className="bg-[#132030]/70 backdrop-blur-md border border-[#3c494c] text-[#d6e4f9] font-technical text-xs uppercase tracking-widest px-7 py-4 rounded hover:bg-[#1e2b3b] hover:border-[#2fd9f4]/50 hover:text-[#2fd9f4] transition-all flex items-center justify-center gap-2.5 cursor-pointer active:scale-95 group shadow-lg"
               >
                 <Play className="w-4 h-4 text-[#2fd9f4] fill-[#2fd9f4]/20 group-hover:fill-[#2fd9f4]" />
-                <span>60-SECOND 3D EXPERIENCE</span>
+                <span>60-SECOND 3D STORY</span>
               </button>
+            </div>
+
+            {/* 1-Page Challenge Breakdown Link */}
+            <div className="mt-4 flex items-center gap-2">
+              <a
+                href="/docs/CardioViz_XR_1_Page_Breakdown.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-technical text-[#2fd9f4] hover:text-white bg-[#132030]/60 hover:bg-[#1e2b3b] border border-[#2fd9f4]/30 px-3.5 py-1.5 rounded transition-colors"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>VIEW 1-PAGE CHALLENGE BREAKDOWN (PDF)</span>
+              </a>
             </div>
 
             {/* Quick Metrics Bar */}
