@@ -174,6 +174,7 @@ Engineered specifically for the 45–75s medical animation standard with synchro
 CardioViz-XR/
 ├── .env.example              # Template for environment configuration
 ├── .gitignore                # Git ignored build artifacts and node modules
+├── LICENSE                   # MIT Open Source License
 ├── docs/                     # Challenge documentation & submission assets
 │   └── CardioViz_XR_1_Page_Breakdown.pdf # 1-Page Creative Breakdown PDF
 ├── index.html                # Main HTML5 entrypoint with Google Fonts
@@ -299,7 +300,23 @@ In accordance with competition guidelines, Generative AI (Google AI Studio and G
 <a name="license"></a>
 ## 📄 License
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+This project is licensed under the **MIT License** — see the [LICENSE](./LICENSE) file for details.
+
+```text
+MIT License
+
+Copyright (c) 2026 CardioViz XR Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
 
 ---
 
