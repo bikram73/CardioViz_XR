@@ -21,8 +21,12 @@ export const ShaderBackground: React.FC<ShaderBackgroundProps> = ({
 
     function syncSize() {
       if (!canvas) return;
-      const w = canvas.clientWidth || window.innerWidth || 1280;
-      const h = canvas.clientHeight || window.innerHeight || 720;
+      // Cap background canvas internal resolution (e.g. 640x360 or 960x540) to minimize GPU fill-rate overhead
+      const clientW = canvas.clientWidth || window.innerWidth || 1280;
+      const clientH = canvas.clientHeight || window.innerHeight || 720;
+      const scale = 0.5; // Half-res background shader with smooth hardware bilinear scaling
+      const w = Math.max(320, Math.floor(clientW * scale));
+      const h = Math.max(180, Math.floor(clientH * scale));
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;

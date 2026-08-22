@@ -29,8 +29,14 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
   selectedStageId,
   onSelectStage,
 }) => {
-  // Progression slider state (0% to 100%)
-  const [progress, setProgress] = useState<number>(33);
+  // Progression slider state (0% to 100%) initialized from prop
+  const [progress, setProgress] = useState<number>(() => {
+    if (selectedStageId === 1) return 10;
+    if (selectedStageId === 2) return 35;
+    if (selectedStageId === 3) return 65;
+    if (selectedStageId === 4) return 95;
+    return 35;
+  });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
   const [rotationAngle, setRotationAngle] = useState<number>(0);
@@ -48,26 +54,28 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
   });
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const progressRef = useRef(progress);
+  const layersRef = useRef(layers);
+  const prevExternalStageRef = useRef(selectedStageId);
 
-  // Sync stage based on progress
+  // Keep refs in sync without triggering canvas restart
   useEffect(() => {
-    let newStage = 1;
-    if (progress < 25) newStage = 1;
-    else if (progress < 55) newStage = 2;
-    else if (progress < 85) newStage = 3;
-    else newStage = 4;
+    progressRef.current = progress;
+  }, [progress]);
 
-    if (newStage !== selectedStageId) {
-      onSelectStage(newStage);
+  useEffect(() => {
+    layersRef.current = layers;
+  }, [layers]);
+
+  // Sync progress when selectedStageId changes from external tab navigation
+  useEffect(() => {
+    if (prevExternalStageRef.current !== selectedStageId) {
+      prevExternalStageRef.current = selectedStageId;
+      if (selectedStageId === 1) setProgress(10);
+      else if (selectedStageId === 2) setProgress(35);
+      else if (selectedStageId === 3) setProgress(65);
+      else if (selectedStageId === 4) setProgress(95);
     }
-  }, [progress, selectedStageId, onSelectStage]);
-
-  // When selectedStageId changes from external tabs, adjust slider
-  useEffect(() => {
-    if (selectedStageId === 1 && progress > 24) setProgress(10);
-    else if (selectedStageId === 2 && (progress < 25 || progress > 54)) setProgress(35);
-    else if (selectedStageId === 3 && (progress < 55 || progress > 84)) setProgress(65);
-    else if (selectedStageId === 4 && progress < 85) setProgress(95);
   }, [selectedStageId]);
 
   // Auto-play progression loop
@@ -75,67 +83,88 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
     if (!isPlaying) return;
     const interval = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return Math.min(100, prev + 0.4);
+        const next = prev >= 100 ? 0 : Math.min(100, prev + 0.35);
+        const stage = next < 25 ? 1 : next < 55 ? 2 : next < 85 ? 3 : 4;
+        if (stage !== prevExternalStageRef.current) {
+          prevExternalStageRef.current = stage;
+          onSelectStage(stage);
+        }
+        return next;
       });
-    }, 50);
+    }, 32);
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, onSelectStage]);
 
   // Dynamic stage details
   const activeStage: ProgressionStage =
     PROGRESSION_STAGES.find((s) => s.id === selectedStageId) ||
     PROGRESSION_STAGES[0];
 
-  // Canvas 2D Particle Simulation (Blood cells, laser scanner, ApoB lipids)
+  // High-Performance 60FPS Canvas 2D Particle Simulation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animId: number;
     let time = 0;
 
-    // Generate simulated erythrocytes & lipid particles
+    // Resize handler for sharp, lag-free canvas
+    const updateCanvasSize = () => {
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      const targetW = Math.floor(rect.width * dpr) || 1024;
+      const targetH = Math.floor(rect.height * dpr) || 600;
+      if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
+      }
+    };
+
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
+
+    // Persistent erythrocytes & lipid particles
     interface Particle {
       x: number;
       y: number;
       vx: number;
       vy: number;
       radius: number;
-      color: string;
-      type: 'erythrocyte' | 'apob' | 'platelet' | 'lipid';
+      type: 'erythrocyte' | 'apob' | 'platelet';
       rot: number;
       rotSpeed: number;
     }
 
     const particles: Particle[] = [];
-    const numErythrocytes = 60;
-    const numApoB = 40;
+    const numErythrocytes = 45;
+    const numApoB = 30;
+
+    const wInit = canvas.width || 1024;
+    const hInit = canvas.height || 600;
 
     for (let i = 0; i < numErythrocytes; i++) {
       particles.push({
-        x: Math.random() * 800,
-        y: 150 + Math.random() * 200,
-        vx: 1.5 + Math.random() * 2.2,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: 6 + Math.random() * 4,
-        color: '#E53935',
+        x: Math.random() * wInit,
+        y: hInit * 0.25 + Math.random() * (hInit * 0.5),
+        vx: 1.8 + Math.random() * 2.0,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: 6 + Math.random() * 3.5,
         type: 'erythrocyte',
         rot: Math.random() * Math.PI * 2,
-        rotSpeed: (Math.random() - 0.5) * 0.05,
+        rotSpeed: (Math.random() - 0.5) * 0.04,
       });
     }
 
     for (let i = 0; i < numApoB; i++) {
       particles.push({
-        x: Math.random() * 800,
-        y: 120 + Math.random() * 260,
-        vx: 0.8 + Math.random() * 1.2,
+        x: Math.random() * wInit,
+        y: hInit * 0.2 + Math.random() * (hInit * 0.6),
+        vx: 1.0 + Math.random() * 1.4,
         vy: (Math.random() - 0.5) * 0.2,
-        radius: 2 + Math.random() * 2,
-        color: '#FDD835',
+        radius: 2.2 + Math.random() * 1.6,
         type: 'apob',
         rot: 0,
         rotSpeed: 0,
@@ -146,119 +175,157 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
       time += 0.02;
       const w = canvas.width;
       const h = canvas.height;
+      const curProgress = progressRef.current;
+      const curLayers = layersRef.current;
+
       ctx.clearRect(0, 0, w, h);
 
       // Occlusion factor from progress (0 = wide lumen, 100 = constricted lumen)
-      const occlusionFactor = progress / 100;
-      const constrictionHeight = 120 * occlusionFactor;
+      const occlusionFactor = curProgress / 100;
+      const constrictionHeight = (h * 0.22) * occlusionFactor;
 
-      // Draw Laser Scanning Beam from top-center
+      // Draw Laser Scanning Beam from top-center (Fast composite gradient)
       ctx.save();
-      const laserX = (Math.sin(time * 0.8) * 0.35 + 0.5) * w;
-      const gradient = ctx.createRadialGradient(
+      const laserX = (Math.sin(time * 0.7) * 0.35 + 0.5) * w;
+      const laserGrad = ctx.createRadialGradient(
         laserX,
         20,
         10,
         laserX,
         h * 0.6,
-        180
+        160
       );
-      gradient.addColorStop(0, 'rgba(47, 217, 244, 0.45)');
-      gradient.addColorStop(0.5, 'rgba(34, 211, 238, 0.18)');
-      gradient.addColorStop(1, 'rgba(47, 217, 244, 0)');
+      laserGrad.addColorStop(0, 'rgba(47, 217, 244, 0.35)');
+      laserGrad.addColorStop(0.5, 'rgba(34, 211, 238, 0.12)');
+      laserGrad.addColorStop(1, 'rgba(47, 217, 244, 0)');
 
       ctx.beginPath();
-      ctx.moveTo(laserX - 25, 0);
-      ctx.lineTo(laserX + 25, 0);
-      ctx.lineTo(laserX + 160, h);
-      ctx.lineTo(laserX - 160, h);
+      ctx.moveTo(laserX - 20, 0);
+      ctx.lineTo(laserX + 20, 0);
+      ctx.lineTo(laserX + 130, h);
+      ctx.lineTo(laserX - 130, h);
       ctx.closePath();
-      ctx.fillStyle = gradient;
+      ctx.fillStyle = laserGrad;
       ctx.fill();
       ctx.restore();
 
-      // Render Endothelial Wall glow if layer is active
-      if (layers.endothelium) {
+      // Render Endothelial Wall glow (High performance dual-stroke without shadowBlur)
+      if (curLayers.endothelium) {
         ctx.save();
-        ctx.strokeStyle = 'rgba(47, 217, 244, 0.6)';
-        ctx.lineWidth = 3;
-        ctx.shadowColor = '#2fd9f4';
-        ctx.shadowBlur = 12;
-
-        // Top vessel boundary with stenosis curve
+        // Outer soft glow line
+        ctx.strokeStyle = 'rgba(47, 217, 244, 0.25)';
+        ctx.lineWidth = 8;
+        
         ctx.beginPath();
-        ctx.moveTo(0, 80);
+        ctx.moveTo(0, h * 0.15);
         ctx.bezierCurveTo(
           w * 0.3,
-          80 + constrictionHeight * 0.6,
+          h * 0.15 + constrictionHeight * 0.6,
           w * 0.6,
-          80 + constrictionHeight * 0.9,
+          h * 0.15 + constrictionHeight * 0.9,
           w,
-          80 + constrictionHeight * 0.3
+          h * 0.15 + constrictionHeight * 0.3
         );
         ctx.stroke();
 
-        // Bottom vessel boundary with stenosis curve
         ctx.beginPath();
-        ctx.moveTo(0, h - 80);
+        ctx.moveTo(0, h * 0.85);
         ctx.bezierCurveTo(
           w * 0.3,
-          h - 80 - constrictionHeight * 0.6,
+          h * 0.85 - constrictionHeight * 0.6,
           w * 0.6,
-          h - 80 - constrictionHeight * 0.9,
+          h * 0.85 - constrictionHeight * 0.9,
           w,
-          h - 80 - constrictionHeight * 0.3
+          h * 0.85 - constrictionHeight * 0.3
+        );
+        ctx.stroke();
+
+        // Inner bright line
+        ctx.strokeStyle = 'rgba(47, 217, 244, 0.85)';
+        ctx.lineWidth = 2.5;
+
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.15);
+        ctx.bezierCurveTo(
+          w * 0.3,
+          h * 0.15 + constrictionHeight * 0.6,
+          w * 0.6,
+          h * 0.15 + constrictionHeight * 0.9,
+          w,
+          h * 0.15 + constrictionHeight * 0.3
+        );
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, h * 0.85);
+        ctx.bezierCurveTo(
+          w * 0.3,
+          h * 0.85 - constrictionHeight * 0.6,
+          w * 0.6,
+          h * 0.85 - constrictionHeight * 0.9,
+          w,
+          h * 0.85 - constrictionHeight * 0.3
         );
         ctx.stroke();
         ctx.restore();
       }
 
       // Render Plaque Accumulation if layer is active
-      if (layers.plaque && progress > 20) {
+      if (curLayers.plaque && curProgress > 20) {
         ctx.save();
         const plaqueGrad = ctx.createLinearGradient(0, 0, w, h);
-        plaqueGrad.addColorStop(0, 'rgba(255, 174, 131, 0.25)');
+        plaqueGrad.addColorStop(0, 'rgba(255, 174, 131, 0.3)');
         plaqueGrad.addColorStop(0.5, 'rgba(249, 115, 22, 0.45)');
         plaqueGrad.addColorStop(1, 'rgba(220, 38, 38, 0.3)');
 
         // Top plaque lump
         ctx.beginPath();
-        ctx.moveTo(w * 0.25, 80);
+        ctx.moveTo(w * 0.25, h * 0.15);
         ctx.quadraticCurveTo(
           w * 0.55,
-          80 + constrictionHeight * 1.1,
+          h * 0.15 + constrictionHeight * 1.1,
           w * 0.85,
-          80
+          h * 0.15
         );
         ctx.fillStyle = plaqueGrad;
         ctx.fill();
 
         // Bottom plaque lump
         ctx.beginPath();
-        ctx.moveTo(w * 0.25, h - 80);
+        ctx.moveTo(w * 0.25, h * 0.85);
         ctx.quadraticCurveTo(
           w * 0.55,
-          h - 80 - constrictionHeight * 1.1,
+          h * 0.85 - constrictionHeight * 1.1,
           w * 0.85,
-          h - 80
+          h * 0.85
         );
         ctx.fill();
         ctx.restore();
       }
 
-      // Render Thrombus Clot Mesh if Stage 4 (progress > 80)
-      if (layers.thrombus && progress > 75) {
+      // Render Thrombus Clot Mesh if Stage 4 (progress > 75)
+      if (curLayers.thrombus && curProgress > 75) {
         ctx.save();
-        const clotIntensity = (progress - 75) / 25;
-        ctx.fillStyle = `rgba(147, 0, 10, ${clotIntensity * 0.75})`;
-        ctx.shadowColor = '#ff5050';
-        ctx.shadowBlur = 18;
-
+        const clotIntensity = (curProgress - 75) / 25;
+        
+        // Fast dual-layer clot core
+        ctx.fillStyle = `rgba(255, 80, 80, ${clotIntensity * 0.25})`;
         ctx.beginPath();
         ctx.arc(
           w * 0.65,
           h * 0.5,
-          25 + clotIntensity * 35,
+          35 + clotIntensity * 40,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+
+        ctx.fillStyle = `rgba(160, 10, 20, ${clotIntensity * 0.85})`;
+        ctx.beginPath();
+        ctx.arc(
+          w * 0.65,
+          h * 0.5,
+          22 + clotIntensity * 28,
           0,
           Math.PI * 2
         );
@@ -266,11 +333,11 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
 
         // Jagged fibrin strands
         ctx.strokeStyle = `rgba(255, 180, 171, ${clotIntensity * 0.85})`;
-        ctx.lineWidth = 2;
-        for (let j = 0; j < 8; j++) {
-          const ang = (j / 8) * Math.PI * 2 + time;
-          const r1 = 15;
-          const r2 = 45 * clotIntensity;
+        ctx.lineWidth = 1.8;
+        for (let j = 0; j < 6; j++) {
+          const ang = (j / 6) * Math.PI * 2 + time * 0.5;
+          const r1 = 12;
+          const r2 = 38 * clotIntensity;
           ctx.beginPath();
           ctx.moveTo(
             w * 0.65 + Math.cos(ang) * r1,
@@ -286,90 +353,99 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
       }
 
       // Render Flowing Blood Cells & Particles
-      particles.forEach((p) => {
-        // Speed slows down if occlusion is severe or near stenosis
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
         let currentSpeed = p.vx;
         if (p.x > w * 0.35 && p.x < w * 0.75) {
-          // Narrow channel accelerates velocity, but severe thrombus arrests flow
-          if (progress > 80) {
+          if (curProgress > 80) {
             currentSpeed *= 0.25;
           } else {
-            currentSpeed *= 1 + occlusionFactor * 0.6;
+            currentSpeed *= 1 + occlusionFactor * 0.5;
           }
         }
 
         p.x += currentSpeed;
-        p.y += p.vy + Math.sin(time * 2 + p.x * 0.01) * 0.3;
+        p.y += p.vy + Math.sin(time * 2 + p.x * 0.01) * 0.25;
         p.rot += p.rotSpeed;
 
         // Wrap around canvas
-        if (p.x > w + 20) {
-          p.x = -20;
-          p.y = 120 + Math.random() * (h - 240);
+        if (p.x > w + 25) {
+          p.x = -25;
+          p.y = h * 0.22 + Math.random() * (h * 0.56);
         }
 
-        // Draw Erythrocytes
-        if (p.type === 'erythrocyte' && layers.bloodFlow) {
+        // Draw Erythrocytes (Optimized fill without expensive gradient creation per cell)
+        if (p.type === 'erythrocyte' && curLayers.bloodFlow) {
           ctx.save();
           ctx.translate(p.x, p.y);
           ctx.rotate(p.rot);
 
-          // Biconcave disc 3D appearance
-          const grad = ctx.createRadialGradient(0, 0, 1, 0, 0, p.radius);
-          grad.addColorStop(0, '#990000');
-          grad.addColorStop(0.6, '#EF4444');
-          grad.addColorStop(1, '#68000a');
-
-          ctx.fillStyle = grad;
+          ctx.fillStyle = '#EF4444';
           ctx.beginPath();
           ctx.ellipse(0, 0, p.radius, p.radius * 0.65, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Subtle dimple shadow
-          ctx.fillStyle = 'rgba(40, 0, 0, 0.5)';
+          // Subtle dimple highlight
+          ctx.fillStyle = '#991B1B';
           ctx.beginPath();
-          ctx.arc(0, 0, p.radius * 0.35, 0, Math.PI * 2);
+          ctx.arc(0, 0, p.radius * 0.32, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
         }
 
         // Draw ApoB Lipoprotein Particles (Gold/Orange spheres)
-        if (p.type === 'apob' && layers.apobParticles) {
+        if (p.type === 'apob' && curLayers.apobParticles) {
           ctx.save();
+          ctx.fillStyle = 'rgba(253, 216, 53, 0.4)';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius * 1.6, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#FDD835';
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = '#FDD835';
-          ctx.shadowColor = '#FDD835';
-          ctx.shadowBlur = 6;
           ctx.fill();
           ctx.restore();
         }
-      });
+      }
 
       animId = requestAnimationFrame(render);
     };
 
-    render();
+    animId = requestAnimationFrame(render);
 
     return () => {
+      window.removeEventListener('resize', updateCanvasSize);
       cancelAnimationFrame(animId);
     };
-  }, [progress, layers]);
+  }, []); // Run once on mount, syncs reactively with progressRef & layersRef
 
   const toggleLayer = (key: keyof VisualLayerVisibility) => {
     setLayers((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const handleSliderChange = (newVal: number) => {
+    setProgress(newVal);
+    const newStage = newVal < 25 ? 1 : newVal < 55 ? 2 : newVal < 85 ? 3 : 4;
+    if (newStage !== prevExternalStageRef.current) {
+      prevExternalStageRef.current = newStage;
+      onSelectStage(newStage);
+    }
+  };
+
   const handleStageSelect = (stageId: number) => {
+    prevExternalStageRef.current = stageId;
     onSelectStage(stageId);
-    if (stageId === 1) setProgress(5);
-    if (stageId === 2) setProgress(35);
-    if (stageId === 3) setProgress(65);
-    if (stageId === 4) setProgress(95);
+    if (stageId === 1) setProgress(10);
+    else if (stageId === 2) setProgress(35);
+    else if (stageId === 3) setProgress(65);
+    else if (stageId === 4) setProgress(95);
   };
 
   const handleReset = () => {
-    setProgress(33);
+    prevExternalStageRef.current = 2;
+    setProgress(35);
     setZoomLevel(1);
     setRotationAngle(0);
     setIsPlaying(false);
@@ -671,7 +747,7 @@ export const ProceduresView: React.FC<ProceduresViewProps> = ({
                   min="0"
                   max="100"
                   value={progress}
-                  onChange={(e) => setProgress(Number(e.target.value))}
+                  onChange={(e) => handleSliderChange(Number(e.target.value))}
                   className="w-full h-2 bg-[#1e2b3b] rounded-lg appearance-none cursor-pointer accent-[#2fd9f4] focus:outline-none"
                   style={{
                     background: `linear-gradient(to right, #2fd9f4 0%, #2fd9f4 ${progress}%, #1e2b3b ${progress}%, #1e2b3b 100%)`,
