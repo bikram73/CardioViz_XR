@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="text-[#bbc9cd]/60 text-[11px] max-w-xl">
-        © 2024–2026 CardioViz XR Medical. For Educational &amp; Research Visualization Purposes Only. Not for Primary Clinical Diagnosis.
+        © 2026 CardioViz XR Medical. For Educational &amp; Research Visualization Purposes Only. Not for Primary Clinical Diagnosis.
       </div>
 
       {/* Simple Information Modal */}
